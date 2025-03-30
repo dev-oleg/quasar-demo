@@ -1,6 +1,4 @@
 export default {
-  failed: 'Action failed',
-  success: 'Action was successful',
   navigation: 'Navigation',
   filter: 'Filter',
   noData: 'No Data',
@@ -39,8 +37,8 @@ export default {
       title: 'Delete Posts',
       message: 'Are you sure?',
       result: {
-        success: 'Post {title} was deleted successfully',
-        error: 'Post {title} was not deleted',
+        success: 'Post was deleted successfully',
+        error: 'Post was not deleted',
       },
     },
   },
@@ -56,6 +54,7 @@ export default {
     },
   },
   todos: {
+    status: 'Status',
     table: {
       id: 'ID',
       title: 'Title',

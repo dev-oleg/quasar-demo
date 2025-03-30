@@ -1,6 +1,4 @@
 export default {
-  failed: 'Ошибка',
-  success: 'Успешно',
   navigation: 'Навигация',
   filter: 'Фильтр',
   noData: 'Нет данных',
@@ -39,8 +37,8 @@ export default {
       title: 'Удаление постов',
       message: 'Вы уверены?',
       result: {
-        success: 'Пост {title} был успешно удален',
-        error: 'Пост {title} не был удален',
+        success: 'Пост был успешно удален',
+        error: 'Пост не был удален',
       },
     },
   },
@@ -56,6 +54,7 @@ export default {
     },
   },
   todos: {
+    status: 'Статус',
     table: {
       id: 'ID',
       title: 'Название',

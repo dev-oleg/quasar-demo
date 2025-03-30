@@ -132,16 +132,16 @@ function openPostsDeleteDialog() {
 
     postsSuccess.forEach(({ title }) => {
       Notify.create({
-        message: 'Успех',
-        caption: t('posts.deleteDialog.result.success', { title }),
+        message: t('posts.deleteDialog.result.success', { title }),
+        caption: title,
         type: 'positive',
       });
     });
 
     postsError.forEach(({ title }) => {
       Notify.create({
-        message: 'Ошибка',
-        caption: t('posts.deleteDialog.result.error', { title }),
+        message: t('posts.deleteDialog.result.error', { title }),
+        caption: title,
         type: 'negative',
       });
     });

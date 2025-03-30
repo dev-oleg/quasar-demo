@@ -32,7 +32,7 @@
         <q-toggle
           toggle-indeterminate
           v-model="statusFilter"
-          label="Status"
+          :label="$t('todos.status')"
           checked-icon="check_circle"
           unchecked-icon="cancel"
         />
