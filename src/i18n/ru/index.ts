@@ -11,7 +11,10 @@ export default {
     todos: 'Список дел',
   },
   users: {
-    currentUser: 'Текущий пользователь',
+    currentUser: {
+      title: 'Текущий пользователь',
+      notSelected: 'Не выбран',
+    },
     table: {
       id: 'ID',
       username: 'Ник',
@@ -54,7 +57,11 @@ export default {
     },
   },
   todos: {
-    status: 'Статус',
+    status: {
+      all: 'Все',
+      completed: 'Выполнено',
+      inCompleted: 'Не выполнено',
+    },
     table: {
       id: 'ID',
       title: 'Название',

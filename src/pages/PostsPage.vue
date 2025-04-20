@@ -87,11 +87,11 @@ const postsFiltered = computed<Array<Post>>(() =>
 
 const hasPosts = computed<boolean>(() => postsFiltered.value.length > 0);
 
-async function getPosts() {
+async function getPosts(userId: number) {
   try {
     isPostsLoading.value = true;
 
-    const { data } = await fetchPosts(userId.value);
+    const { data } = await fetchPosts(userId);
 
     posts.value = data;
   } catch (e) {
@@ -163,7 +163,9 @@ function openCommentsDialog(evt: Event, post: Post) {
   });
 }
 
-onMounted(getPosts);
+onMounted(async () => {
+  if (userId.value) await getPosts(userId.value);
+});
 </script>
 
 <style scoped lang="scss">

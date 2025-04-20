@@ -1,5 +1,5 @@
 <template>
-  <q-item :to="to" :disable="disabled" exact>
+  <q-item :to="to" :disable="disabled" :active="active">
     <q-item-section v-if="icon" avatar>
       <q-icon :name="icon" />
     </q-item-section>
@@ -18,6 +18,7 @@ export interface EssentialLinkProps {
   icon?: string;
   to?: RouteLocationNamedRaw;
   disabled?: boolean;
+  active?: boolean;
 }
 
 defineProps<EssentialLinkProps>();

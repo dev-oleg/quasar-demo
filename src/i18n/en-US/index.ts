@@ -11,7 +11,10 @@ export default {
     todos: 'Todos',
   },
   users: {
-    currentUser: 'Current User',
+    currentUser: {
+      title: 'Current User',
+      notSelected: 'Not selected',
+    },
     table: {
       id: 'ID',
       username: 'Username',
@@ -54,7 +57,11 @@ export default {
     },
   },
   todos: {
-    status: 'Status',
+    status: {
+      all: 'All',
+      completed: 'Completed',
+      inCompleted: 'Incompleted',
+    },
     table: {
       id: 'ID',
       title: 'Title',

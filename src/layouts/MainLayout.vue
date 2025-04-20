@@ -2,14 +2,14 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
-
         <q-toolbar-title>{{ pageTitle }}</q-toolbar-title>
 
-        <div v-if="currentUser" class="q-mr-md">
-          <span class="q-mr-xs">{{ $t('users.currentUser') }}:</span>
+        <div class="q-mr-md">
+          <span class="q-mr-xs">{{ $t('users.currentUser.title') }}:</span>
 
-          <span class="text-weight-bold">{{ currentUser.username }}</span>
+          <span class="text-weight-bold">
+            {{ currentUser?.username ?? $t('users.currentUser.notSelected') }}
+          </span>
         </div>
 
         <div>
@@ -29,9 +29,17 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer :model-value="true" show-if-above bordered :mini="isDrawerMini">
       <q-list>
-        <q-item-label header>{{ $t('navigation') }}</q-item-label>
+        <q-item>
+          <q-item-section avatar>
+            <q-btn flat dense round icon="menu" class="drawer-btn" @click="toggleDrawerMini" />
+          </q-item-section>
+
+          <q-item-section>
+            <q-item-label class="text-body1">{{ $t('navigation') }}</q-item-label>
+          </q-item-section>
+        </q-item>
 
         <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
       </q-list>
@@ -67,7 +75,7 @@ const userId = useRouteId();
 const usersStore = useUsersStore();
 const { currentUser } = storeToRefs(usersStore);
 
-const leftDrawerOpen = ref(false);
+const isDrawerMini = ref(false);
 
 const pageTitle = computed<string>(() => {
   const page = route.meta.title as string;
@@ -80,29 +88,33 @@ const linksList = computed<Array<EssentialLinkProps>>(() => [
     title: t('page.users'),
     icon: 'person',
     to: { name: 'users' },
+    active: route.meta.title === 'users',
   },
   {
     title: t('page.posts'),
     icon: 'description',
     to: { name: 'posts', params: { userId: userId.value } },
     disabled: !userId.value,
+    active: route.meta.title === 'posts',
   },
   {
     title: t('page.albums'),
     icon: 'photo_library',
     to: { name: 'albums', params: { userId: userId.value } },
     disabled: !userId.value,
+    active: route.meta.title === 'albums',
   },
   {
     title: t('page.todos'),
     icon: 'list_alt',
     to: { name: 'todos', params: { userId: userId.value } },
     disabled: !userId.value,
+    active: route.meta.title === 'todos',
   },
 ]);
 
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
+function toggleDrawerMini() {
+  isDrawerMini.value = !isDrawerMini.value;
 }
 
 watch(locale, () => {
@@ -122,5 +134,11 @@ onMounted(async () => {
 .lang-switch {
   min-width: 150px;
   background-color: #fff;
+}
+
+.drawer-btn {
+  position: absolute;
+  top: 8px;
+  left: 12px;
 }
 </style>

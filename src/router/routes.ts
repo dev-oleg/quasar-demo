@@ -23,6 +23,14 @@ const routes: RouteRecordRaw[] = [
             component: () => import('layouts/BaseLayout.vue'),
             children: [
               {
+                path: '',
+                name: 'user',
+                meta: {
+                  title: 'users',
+                },
+                component: () => import('pages/UsersPage.vue'),
+              },
+              {
                 path: 'todos',
                 name: 'todos',
                 meta: {

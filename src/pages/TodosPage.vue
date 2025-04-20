@@ -29,12 +29,11 @@
           @update:model-value="updateTextFilter"
         />
 
-        <q-toggle
-          toggle-indeterminate
+        <q-btn-toggle
           v-model="statusFilter"
-          :label="$t('todos.status')"
-          checked-icon="check_circle"
-          unchecked-icon="cancel"
+          :options="statusOptions"
+          class="q-ml-md"
+          toggle-color="primary"
         />
 
         <q-space />
@@ -58,9 +57,10 @@
 </template>
 
 <script setup lang="ts">
-import type { QInputProps } from 'quasar';
+import type { QInputProps, QBtnToggleProps } from 'quasar';
 import type { Todo } from 'src/types';
 import { ref, computed, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useQuasar } from 'quasar';
 import { fetchTodos } from 'src/api';
 import NoData from 'components/NoData.vue';
@@ -68,6 +68,8 @@ import TodoCreateDialog from 'components/TodoCreateDialog.vue';
 import { useRouteId, useTableColumns } from 'src/composables';
 
 const $q = useQuasar();
+
+const { t } = useI18n();
 
 const userId = useRouteId();
 const { todoColumns } = useTableColumns();
@@ -77,6 +79,21 @@ const isTodosLoading = ref<boolean>(false);
 
 const textFilter = ref<string>('');
 const statusFilter = ref<boolean | null>(null);
+
+const statusOptions = computed<QBtnToggleProps['options']>(() => [
+  {
+    value: null,
+    label: t('todos.status.all'),
+  },
+  {
+    value: true,
+    label: t('todos.status.completed'),
+  },
+  {
+    value: false,
+    label: t('todos.status.inCompleted'),
+  },
+]);
 
 const todosFiltered = computed<Array<Todo>>(() => {
   if (statusFilter.value === null) {
@@ -124,7 +141,7 @@ function toggleCompleted(idToggled: number) {
 }
 
 onMounted(async () => {
-  await getTodos(userId.value);
+  if (userId.value) await getTodos(userId.value);
 });
 </script>
 

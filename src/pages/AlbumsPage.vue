@@ -143,7 +143,7 @@ watch(
 );
 
 onMounted(async () => {
-  await getAlbums(userId.value);
+  if (userId.value) await getAlbums(userId.value);
 });
 </script>
 
